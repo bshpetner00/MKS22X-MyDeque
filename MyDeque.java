@@ -5,9 +5,11 @@ public class MyDeque<E> {
 		data = new E[0];
 	}
 	public MyDeque(int initialCapacity) {
-
+		data = new E[initialCapacity];
 	}
-	public int size(){ }
+	public int size(){ 
+		return this.size;
+	}
 	public String toString(){ }
 	public void addFirst(E element){ }
 	public void addLast(E element){ }
