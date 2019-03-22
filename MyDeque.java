@@ -19,7 +19,7 @@ public class MyDeque<E> {
 		data = (E[])new Object[10];
 	}
 	public int size(){ 
-		return data.length;
+		return size;
 	}
 	public String toString(){ 
 		String r = "{";
@@ -71,11 +71,13 @@ public class MyDeque<E> {
 		if (data.length == 0) {
 			throw new NoSuchElementException("Deque is empty");
 		}
+		return data[start];
 	}
 
 	public E getLast() throws NoSuchElementException {
 		if (data.length == 0) {
 			throw new NoSuchElementException("Deque is empty");
 		}
+		return data[end];
 	}
 }
