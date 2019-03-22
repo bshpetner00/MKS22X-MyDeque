@@ -1,16 +1,25 @@
+import java.util.*;
+import java.io.*;
+
 public class MyDeque<E> {
 	private E[] data;
 	private int size, start, end;
-	@SuppressWarnings("unchecked") 
-	public MyDeque(){
-		data = (E[])new Object[10];
-	}
 	@SuppressWarnings("unchecked")
 	public MyDeque(int initialCapacity) {
+		size = initialCapacity;
+		start = 0;
+		end = 0;
 		data = (E[])new Object[initialCapacity];
 	}
+	@SuppressWarnings("unchecked") 
+	public MyDeque(){
+		size = 10;
+		start = 0;
+		end = 0;
+		data = (E[])new Object[10];
+	}
 	public int size(){ 
-		return this.size;
+		return data.length;
 	}
 	public String toString(){ 
 		String r = "{";
@@ -19,10 +28,54 @@ public class MyDeque<E> {
 		}
 		return r + "}";
 	}
-	public void addFirst(E element){ }
-	public void addLast(E element){ }
-	public E removeFirst(){ }
-	public E removeLast(){ }
-	public E getFirst(){ }
-	public E getLast(){ }
+
+	public void resize(E[]data) {
+		//use for add
+	}
+
+	public void addFirst(E element) throws NullPointerException {
+		if (element.equals(null)) {
+			throw new NullPointerException("Element is null.");
+		}
+	}
+
+	public void addLast(E element) throws NullPointerException{
+		if (element.equals(null)) {
+			throw new NullPointerException("Element is null.");
+		}
+	}
+
+	public E removeFirst() throws NoSuchElementException {
+		if (data.length == 0) {
+			throw new NoSuchElementException("Deque is empty");
+		}
+		E bye = data[start];
+		data[start] = null;
+		size--;
+		start++;
+		return bye;
+	}
+
+	public E removeLast() throws NoSuchElementException {
+		if (data.length == 0) {
+			throw new NoSuchElementException("Deque is empty");
+		}
+		E bye = data[end];
+		data[end] = null;
+		size--;
+		end--;
+		return bye;
+	}
+
+	public E getFirst() throws NoSuchElementException {
+		if (data.length == 0) {
+			throw new NoSuchElementException("Deque is empty");
+		}
+	}
+
+	public E getLast() throws NoSuchElementException {
+		if (data.length == 0) {
+			throw new NoSuchElementException("Deque is empty");
+		}
+	}
 }
