@@ -1,11 +1,13 @@
 public class MyDeque<E> {
 	private E[] data;
 	private int size, start, end;
+	@SuppressWarnings("unchecked") 
 	public MyDeque(){
-		data = new E[0];
+		data = (E[])new Object[10];
 	}
+	@SuppressWarnings("unchecked")
 	public MyDeque(int initialCapacity) {
-		data = new E[initialCapacity];
+		data = (E[])new Object[initialCapacity];
 	}
 	public int size(){ 
 		return this.size;
@@ -13,7 +15,7 @@ public class MyDeque<E> {
 	public String toString(){ 
 		String r = "{";
 		for (int i = 0; i < data.length; i++) {
-			r = r + data[i]; + " ";
+			r = r + data[i] + " ";
 		}
 		return r + "}";
 	}
