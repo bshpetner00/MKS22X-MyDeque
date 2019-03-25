@@ -79,6 +79,21 @@ public class MyDeque<E> {
 		if (element.equals(null)) {
 			throw new NullPointerException("Element is null.");
 		}
+		if (size >= 0) {
+			if (size == data.length) {
+				resize();
+				start = 0;
+				end = size;
+			}
+			else {
+				end++;
+			}
+		}
+		else if (end == data.length-1) {
+			end = 0;
+		}
+		size++;
+		data[end] = element;
 	}
 
 	public E removeFirst() throws NoSuchElementException {
@@ -108,6 +123,16 @@ public class MyDeque<E> {
 		E bye = data[end];
 		data[end] = null;
 		size--;
+		if (size == 0) { //account for empty deque
+			start = 0; 
+			end = 0; 
+		}
+		if (end > 0) {
+			end--;
+		}
+		else {
+			end = data.length-1;
+		}
 		end--;
 		return bye;
 	}
