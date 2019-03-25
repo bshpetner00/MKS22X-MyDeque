@@ -6,14 +6,14 @@ public class MyDeque<E> {
 	private int size, start, end;
 	@SuppressWarnings("unchecked")
 	public MyDeque(int initialCapacity) {
-		size = initialCapacity;
+		size = 0;
 		start = 0;
 		end = 0;
 		data = (E[])new Object[initialCapacity];
 	}
 	@SuppressWarnings("unchecked") 
 	public MyDeque(){
-		size = 10;
+		size = 0;
 		start = 0;
 		end = 0;
 		data = (E[])new Object[10];
@@ -23,20 +23,56 @@ public class MyDeque<E> {
 	}
 	public String toString(){ 
 		String r = "{";
-		for (int i = 0; i < data.length; i++) {
-			r = r + data[i] + " ";
+		if (size == 0) { //empty
+			return r + "}";
+		}
+		if (start <= end) { //normal conditions
+			for (int i = start; i <= end; i++) {
+				r = r + data[i] + " ";
+			}
+		}
+		else { // start > end, needs to loop around
+			for (int j = start; j != end+1; j++) {
+				r = r + data[j] + " ";
+				if (j == data.length-1) {
+					j = 0;
+				}
+			}
 		}
 		return r + "}";
 	}
 
-	public void resize(E[]data) {
-		//use for add
+	@SuppressWarnings("unchecked")
+	private void resize() {
+		E[] resizedArray = (E[])new Object[data.length*2+1];
+		int i = 0;
+		for (E s:data) {
+			resizedArray[i] = data[i];
+			i++;
+		}
+		data = resizedArray;
 	}
+
 
 	public void addFirst(E element) throws NullPointerException {
 		if (element.equals(null)) {
 			throw new NullPointerException("Element is null.");
 		}
+		if (size == data.length) {
+			resize();
+			start = data.length-1;
+			end = size-1;
+		}
+		else if (size >= 0) {
+			if (start == 0) {
+				start = data.length-1;
+			}
+			else {
+				start--;
+			}
+		}
+		size++;
+		data[start] = element;
 	}
 
 	public void addLast(E element) throws NullPointerException{
@@ -50,9 +86,18 @@ public class MyDeque<E> {
 			throw new NoSuchElementException("Deque is empty");
 		}
 		E bye = data[start];
-		data[start] = null;
-		size--;
-		start++;
+		data[start] = null; //removal
+		size--; //size goes down
+		if (size == 0) { //account for empty deque
+			start = 0; 
+			end = 0; 
+		}
+		if (start < data.length-1) {
+			start++; //go up one
+		}
+		else {
+			start = 0; //loop to front if start is at end of array
+		}
 		return bye;
 	}
 
@@ -78,6 +123,9 @@ public class MyDeque<E> {
 		if (data.length == 0) {
 			throw new NoSuchElementException("Deque is empty");
 		}
-		return data[end];
+		else if (end == 0) {
+			return data[data.length-1];
+		}
+		return data[end-1];
 	}
 }
