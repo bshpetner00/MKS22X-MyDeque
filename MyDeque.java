@@ -28,12 +28,16 @@ public class MyDeque<E> {
 		}
 		if (start <= end) { //normal conditions
 			for (int i = start; i <= end; i++) {
-				r = r + data[i] + " ";
+				if (data[i] != null) {	
+					r = r + data[i] + " ";
+				}
 			}
 		}
 		else { // start > end, needs to loop around
 			for (int j = start; j != end+1; j++) {
-				r = r + data[j] + " ";
+				if (data[j] != null) {
+					r = r + data[j] + " ";
+				}
 				if (j == data.length-1) {
 					j = 0;
 				}
@@ -107,7 +111,7 @@ public class MyDeque<E> {
 			start = 0; 
 			end = 0; 
 		}
-		if (start < data.length-1) {
+		else if (start < data.length-1) {
 			start++; //go up one
 		}
 		else {
