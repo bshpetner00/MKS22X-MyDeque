@@ -137,7 +137,6 @@ public class MyDeque<E> {
 		else {
 			end = data.length-1;
 		}
-		end--;
 		return bye;
 	}
 
