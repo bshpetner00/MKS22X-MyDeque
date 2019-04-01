@@ -16,6 +16,16 @@ public class Calculator {
 				double k = deque.removeLast();
 				deque.addLast(k-o);
 			}
+			else if (ary[i] == "*") {
+				double o = deque.removeLast();
+				double k = deque.removeLast();
+				deque.addLast(o*k);
+			}
+			else if (ary[i] == "/") {
+				double o = deque.removeLast();
+				double k = deque.removeLast();
+				deque.addLast(k/o);
+			}
 		}
 	}
 
